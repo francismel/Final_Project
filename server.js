@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const favicon = require("serve-favicon");
 const logger = require("morgan");
+const mongoose = require("mongoose");
 
 const app = express();
 
@@ -9,7 +10,6 @@ app.use(logger("dev"));
 app.use(express.json());
 require("dotenv").config();
 
-app.use(express.json());
 app.use(favicon(path.join(__dirname, "build", "favicon.ico")));
 app.use(express.static(path.join(__dirname, "build")));
 
@@ -22,13 +22,11 @@ mongoose
   .then(() => console.log("Database Connected"))
   .catch((err) => console.log(err));
 
-const app = express();
+const usersRouter = require("./routes/api/users");
+const analysisRequestRouter = require("./routes/api/analysisRequest");
 
-const usersRouter = require("./routes/users");
-const analysisRequestRouter = require("./routes/analysisRequest");
-
-app.use("/users", usersRouter);
-app.use("/analysisRequest", analysisRequestRouter);
+app.use("/api/users", require("./routes/api/users"));
+// app.use("/analysisRequest", analysisRequestRouter);
 
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));
