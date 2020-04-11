@@ -3,7 +3,9 @@ const router = express.Router();
 const usersCtrl = require("../../controllers/users");
 
 /*---------- Public Routes ----------*/
+// router.get("/", usersCtrl.index);
 router.post("/signup", usersCtrl.signup);
+router.post("/login", usersCtrl.login);
 
 /*---------- Protected Routes ----------*/
 
