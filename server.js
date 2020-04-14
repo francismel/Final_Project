@@ -26,7 +26,7 @@ const usersRouter = require("./routes/api/users");
 const analysisRequestRouter = require("./routes/api/analysisRequest");
 
 app.use("/api/users", require("./routes/api/users"));
-// app.use("/analysisRequest", analysisRequestRouter);
+app.use("/api/analysisRequest", analysisRequestRouter);
 
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));

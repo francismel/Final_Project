@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import userService from "../utils/userService";
+import userService from "../../utils/userService";
 
 class SignUpForm extends Component {
   state = {
