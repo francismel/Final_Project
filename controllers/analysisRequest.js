@@ -12,21 +12,21 @@ module.exports = {
 
 async function analyzeRequest(req, res, next) {
   var currentPath = __dirname;
-  let topic = req.body.topic;
+  let link = req.body.link;
   let numTweets = req.body.numTweets;
   let pathToPython = "/usr/bin/python";
 
-  let sentiment = new Sentiment();
-  let docx = sentiment.analyze("i like apples");
+  // let sentiment = new Sentiment();
+  // let docx = sentiment.analyze("i like apples");
 
-  console.log(docx);
+  // console.log(docx);
 
   let options = {
     mode: "text",
     pythonPath: "",
     pythonOptions: ["-u"], // get print results in real-time
     scriptPath: currentPath,
-    args: [topic, numTweets],
+    args: [link, numTweets],
   };
   PythonShell.run("experiment.py", options, function (err, results) {
     if (err) throw err;

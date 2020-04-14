@@ -9,7 +9,7 @@ class HomePage extends Component {
     invalidForm: true,
 
     formData: {
-      topic: "",
+      link: "",
       numTweets: 0,
     },
   };
@@ -31,7 +31,7 @@ class HomePage extends Component {
     e.preventDefault();
     try {
       let result = await analysisService.analyzeRequest(this.state.formData);
-      alert("js says the answer is " + result);
+      // alert("js says the answer is " + result);
     } catch (err) {
       alert("Error adding Numbers!");
     }
@@ -85,9 +85,9 @@ class HomePage extends Component {
               <input
                 type="text"
                 className="form-control"
-                placeholder="topic"
-                value={this.state.formData.topic}
-                name="topic"
+                placeholder="link"
+                value={this.state.formData.link}
+                name="link"
                 onChange={this.handleChange}
               />
             </div>
