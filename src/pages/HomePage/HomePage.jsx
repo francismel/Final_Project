@@ -30,8 +30,13 @@ class HomePage extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let result = await analysisService.analyzeRequest(this.state.formData);
-      // alert("js says the answer is " + result);
+      let result = await fetch("http://127.0.0.1:5000/test").then(
+        (response) => {
+          if (response.ok) return response.json();
+          throw new Error("didnt work");
+        }
+      );
+      console.log(result);
     } catch (err) {
       alert("Error adding Numbers!");
     }

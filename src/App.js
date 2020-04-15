@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 import "./App.css";
-import { BrowserRouter as Router } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SignUpForm from "./pages/SignUpPage/SignUpForm";
 import userService from "./utils/userService";
