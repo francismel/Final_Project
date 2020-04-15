@@ -9,12 +9,18 @@ import userService from "./utils/userService";
 import NavBar from "./components/NavBar/NavBar";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import HomePage from "./pages/HomePage/HomePage";
+import PieChart from "./components/PieChart/PieChart";
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       user: userService.getUser(),
+      showFirstDonut: false,
+      firstDonutHighlights: ["awesome place", "great service", "this sucked"],
+      secondDonutHighlights: ["terrible place", "bad service", "was awesome"],
+      showSecondDonut: false,
+      test: 1,
     };
   }
 
@@ -25,6 +31,14 @@ class App extends React.Component {
 
   handleSignupOrLogin = () => {
     this.setState({ user: userService.getUser() });
+  };
+
+  showPie = () => {
+    this.setState({ showFirstDonut: true, showSecondDonut: true });
+  };
+
+  hidePie = () => {
+    this.setState({ showFirstDonut: false, showSecondDonut: false });
   };
 
   render() {
@@ -55,6 +69,29 @@ class App extends React.Component {
                   handleLogout={this.handleLogout}
                 />
                 <HomePage />
+
+                <div className="flexMe centerMe">
+                  <PieChart
+                    title="Chart 1"
+                    data={[20, 50, 50]}
+                    shouldShow={this.state.showFirstDonut}
+                    highlights={this.state.firstDonutHighlights}
+                  />
+
+                  <PieChart
+                    title="Chart 2"
+                    data={[30, 10, 50]}
+                    shouldShow={this.state.showSecondDonut}
+                    highlights={this.state.secondDonutHighlights}
+                  />
+                </div>
+                <br></br>
+                <button onClick={this.showPie} type="button">
+                  Compare!
+                </button>
+                <button onClick={this.hidePie} type="button">
+                  Close
+                </button>
               </div>
             )}
           />

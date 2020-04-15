@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import "./NavBar.css";
@@ -7,33 +7,43 @@ import "./NavBar.css";
 const NavBar = (props) => {
   let nav = props.user ? (
     <div className="nav">
-      <Link to="/tbd" className="whiteText text-muted">
+      <NavLink
+        to="/home"
+        activeStyle={{ color: "white" }}
+        className="whiteText text-muted"
+      >
         TBD
-      </Link>
+      </NavLink>
       &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      <Link
+      <NavLink
         onClick={props.handleLogout}
         to="/login"
+        activeStyle={{ color: "white" }}
         className="whiteText text-muted"
       >
         LOG OUT
-      </Link>
+      </NavLink>
       &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      <Link to="/home" className="whiteText text-muted">
+      <NavLink to="/home" className="whiteText text-muted">
         HOME
-      </Link>
+      </NavLink>
       &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
       <span className="NavBar-welcome">WELCOME, {props.user.name}</span>
     </div>
   ) : (
-    <div>
-      <Link to="/login" className="NavBar-link">
+    <div className="nav">
+      <NavLink to="/login" className="whiteText text-muted">
         LOG IN
-      </Link>
-      &nbsp;&nbsp;|&nbsp;&nbsp;
-      <Link to="/signup" className="NavBar-link">
+      </NavLink>
+      &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+      <NavLink
+        onClick={props.handleLogout}
+        to="/signup"
+        className="whiteText text-muted"
+      >
         SIGN UP
-      </Link>
+      </NavLink>
+      &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
     </div>
   );
 

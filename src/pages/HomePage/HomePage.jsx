@@ -38,39 +38,6 @@ class HomePage extends Component {
   };
 
   render() {
-    //   return (
-    //     <div className="LoginPage">
-    //       <header className="header-footer">Home Page</header>
-    //       <form className="form-horizontal" onSubmit={this.handleSubmit}>
-    //         <div className="form-group">
-    //           <div className="col-sm-12">
-    //             <input
-    //               type="text"
-    //               className="form-control"
-    //               placeholder="searchTerm"
-    //               value={this.state.searchTerm}
-    //               name="searchTerm"
-    //               onChange={this.handleChange}
-    //             />
-    //           </div>
-    //         </div>
-    //         <div className="form-group">
-    //           <div className="col-sm-12">
-    //             <input
-    //               type="number"
-    //               className="form-control"
-    //               placeholder="How Many Tweets to Analyze?"
-    //               value={this.state.numTweets}
-    //               name="numTweets"
-    //               onChange={this.handleChange}
-    //             />
-    //           </div>
-    //         </div>
-    //         <button className="buttonBlue">Submit</button>
-    //       </form>
-    //     </div>
-    //   );
-    // }
     return (
       <div className="LoginPage">
         <header className="header-footer">Home Page</header>

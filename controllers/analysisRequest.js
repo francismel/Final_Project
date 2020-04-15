@@ -14,7 +14,7 @@ async function analyzeRequest(req, res, next) {
   var currentPath = __dirname;
   let link = req.body.link;
   let numTweets = req.body.numTweets;
-  let pathToPython = "/usr/bin/python";
+  // let pathToPython = "/usr/bin/python";
 
   // let sentiment = new Sentiment();
   // let docx = sentiment.analyze("i like apples");

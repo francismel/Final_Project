@@ -13,6 +13,14 @@
   }
 }
 
+.flexMe {
+  display: flex;
+  flex-direction: left;
+}
+.centerMe {
+  margin: auto;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
