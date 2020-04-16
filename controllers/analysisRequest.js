@@ -30,6 +30,7 @@ async function saveRequest(req, res, next) {
   User.findById(req.body.userId, function (error, currUser) {
     currUser.requests.push(newRequest);
     currUser.save();
+    // console.log('awesome')
   });
 }
 

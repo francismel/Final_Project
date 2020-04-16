@@ -81,7 +81,7 @@ class HomePage extends Component {
   render() {
     return (
       <div className="LoginPage">
-        <h1>Enter any Yelp.com url!</h1>
+        <h1>Enter a Yelp.com url!</h1>
         <form
           ref={this.formRef}
           className="form-horizontal"
