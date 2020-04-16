@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const analysisRequestSchema = new Schema(
   {
-    numTweets: { type: Number, required: false },
+    numReviews: { type: Number, required: false },
     username: { type: String, required: false },
   },
   {

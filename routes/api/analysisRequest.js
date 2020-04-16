@@ -1,7 +1,8 @@
 var router = require("express").Router();
-const User = require("../../models/user");
 const analysisRequestCtrl = require("../../controllers/analysisRequest");
 
-router.post("/analyzeRequest", analysisRequestCtrl.analyzeRequest);
+router.post("/saveRequest", analysisRequestCtrl.saveRequest);
+router.get("/getRequests/:id", analysisRequestCtrl.getRequests);
+router.delete("/delRequest/:userId/:requestId", analysisRequestCtrl.delRequest);
 
 module.exports = router;

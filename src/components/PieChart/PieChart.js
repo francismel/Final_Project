@@ -29,7 +29,7 @@ class PieChart extends Component {
         />
       </div>
     ) : (
-      <p>nothing</p>
+      <p></p>
     );
   }
 }
