@@ -10,7 +10,8 @@ app.use(logger("dev"));
 app.use(express.json());
 require("dotenv").config();
 
-app.use(express.static(path.join(__dirname, "build")));
+// app.use(express.static(path.join(__dirname, "build")));
+app.use("/static", express.static(path.join(__dirname, "client/build")));
 app.use(favicon(path.join(__dirname, "build", "favicon.ico")));
 
 mongoose
