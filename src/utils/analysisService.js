@@ -5,10 +5,12 @@ function saveRequest(formData) {
     method: "POST",
     headers: new Headers({ "Content-Type": "application/json" }),
     body: JSON.stringify(formData),
-  }).then((res) => {
-    if (res.ok) return res.json();
-    throw new Error("there was a problem");
-  });
+  })
+    .then((res) => {
+      if (res.ok) return res.json();
+      throw new Error("there was a problem");
+    })
+    .then((data) => data);
 }
 
 function getRequests(userId) {

@@ -8,7 +8,6 @@ import userService from "./utils/userService";
 import NavBar from "./components/NavBar/NavBar";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import HomePage from "./pages/HomePage/HomePage";
-import PieChart from "./components/PieChart/PieChart";
 
 class App extends React.Component {
   constructor() {

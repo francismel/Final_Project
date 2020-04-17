@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import "../LoginPage/LoginPage.css";
 import analysisService from "../../utils/analysisService";
-import axios from "axios";
 import PieChart from "../../components/PieChart/PieChart";
 import userService from "../../utils/userService";
 import RequestsTable from "../../components/Table/RequestTable";
@@ -10,7 +8,9 @@ import RequestsTable from "../../components/Table/RequestTable";
 class HomePage extends Component {
   state = {
     user: userService.getUser(),
+    updateVal: 0,
     mainDonut: {},
+    message: "",
     invalidForm: true,
     firstCompareDonut: {
       showFirstDonut: true,
@@ -22,8 +22,28 @@ class HomePage extends Component {
       link: "",
       numTweets: 0,
     },
-    shouldUpdate: false,
+    allRequestLinks: [],
+    allRequestIds: [],
+    allRequestNums: [],
   };
+
+  async componentDidMount() {
+    if (this.state.user) {
+      let userId = this.state.user._id;
+      const allRequests = await analysisService.getRequests(userId);
+      for (let i = 0; i < allRequests.length; i++) {
+        let link = allRequests[i].link;
+        let numReviews = allRequests[i].numReviews;
+        let id = allRequests[i]._id;
+
+        this.setState({
+          allRequestLinks: this.state.allRequestLinks.concat(link),
+          allRequestIds: this.state.allRequestIds.concat(id),
+          allRequestNums: this.state.allRequestNums.concat(numReviews),
+        });
+      }
+    }
+  }
 
   formRef = React.createRef();
 
@@ -36,6 +56,19 @@ class HomePage extends Component {
       formData,
       invalidForm: !this.formRef.current.checkValidity(),
     });
+  };
+
+  async delRequest(idToDel) {
+    let userRequestInfo = {
+      userId: this.state.user._id,
+      reviewId: idToDel,
+    };
+    await analysisService.delRequest(userRequestInfo);
+  }
+
+  delFunction = (childData) => {
+    this.setState({ message: childData });
+    console.log("id to delete ", childData);
   };
 
   showPie = () => {
@@ -73,9 +106,15 @@ class HomePage extends Component {
       userId: userId,
     };
 
-    await analysisService.saveRequest(request);
+    let reviewId = await analysisService.saveRequest(request);
 
-    this.setState({ shouldUpdate: true });
+    console.log("review id ", reviewId.data);
+
+    this.setState({
+      allRequestLinks: this.state.allRequestLinks.concat(url),
+      allRequestIds: this.state.allRequestIds.concat(reviewId.data),
+      allRequestNums: this.state.allRequestNums.concat(numReviews),
+    });
   };
 
   render() {
@@ -135,7 +174,14 @@ class HomePage extends Component {
         <button onClick={this.hidePie} type="button">
           Close
         </button>
-        <RequestsTable user={this.state.user} />
+        <p>id to delete: {this.state.message}</p>
+        <RequestsTable
+          user={this.state.user}
+          allRequestLinks={this.state.allRequestLinks}
+          allRequestIds={this.state.allRequestIds}
+          allRequestNums={this.state.allRequestNums}
+          delFunction={this.delFunction}
+        />
       </div>
     );
   }

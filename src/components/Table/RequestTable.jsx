@@ -1,68 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import analysisService from "../../utils/analysisService";
 import "./RequestTable.css";
 
 class RequestsTable extends React.Component {
-  state = {
-    allRequestLinks: [],
-    allRequestNums: [],
-    allRequestId: [],
-  };
-
-  async componentDidMount() {
-    this.loadData();
-  }
-
-  async loadData() {
-    if (this.props.user) {
-      let userId = this.props.user._id;
-      const allRequests = await analysisService.getRequests(userId);
-
-      for (let i = 0; i < allRequests.length; i++) {
-        let link = allRequests[i].link;
-        let numReviews = allRequests[i].numReviews;
-        let id = allRequests[i]._id;
-
-        this.setState({
-          allRequestLinks: this.state.allRequestLinks.concat(link),
-          allRequestId: this.state.allRequestId.concat(id),
-        });
-        this.setState({
-          allRequestNums: this.state.allRequestNums.concat(numReviews),
-        });
-      }
-    }
-  }
-
-  async loadAfterDelete() {
-    let userId = this.props.user._id;
-    const allRequests = await analysisService.getRequests(userId);
-
-    this.setState({
-      allRequestLinks: [],
-      allRequestId: [],
-      allRequestNums: [],
-    });
-
-    for (let i = 0; i < allRequests.length; i++) {
-      let link = allRequests[i].link;
-      let numReviews = allRequests[i].numReviews;
-      let id = allRequests[i]._id;
-
-      this.setState({
-        allRequestLinks: this.state.allRequestLinks.concat(link),
-        allRequestId: this.state.allRequestId.concat(id),
-      });
-      this.setState({
-        allRequestNums: this.state.allRequestNums.concat(numReviews),
-      });
-    }
-  }
-
   renderTableData() {
-    return this.state.allRequestLinks.map((link, index) => {
-      let numReviews = this.state.allRequestNums[index];
-      let id = this.state.allRequestId[index];
+    return this.props.allRequestLinks.map((link, index) => {
+      let numReviews = this.props.allRequestNums[index];
+      let id = this.props.allRequestIds[index];
 
       return (
         <tr key={index}>
@@ -73,7 +17,7 @@ class RequestsTable extends React.Component {
           <td>{30}</td>
           <td>{id}</td>
           <td>
-            <button value={id} onClick={(e) => this.delRequest(e.target.value)}>
+            <button value={id} onClick={(e) => this.sendData(e.target.value)}>
               X
             </button>
           </td>
@@ -89,6 +33,10 @@ class RequestsTable extends React.Component {
     };
     await analysisService.delRequest(userRequestInfo);
   }
+
+  sendData = (val) => {
+    this.props.delFunction(val);
+  };
 
   renderTableHeader() {
     let header = [

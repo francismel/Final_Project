@@ -1,8 +1,5 @@
 const analysisRequest = require("../models/analysisRequest");
 const path = require("path");
-const { spawn } = require("child_process");
-const { PythonShell } = require("python-shell");
-const Sentiment = require("sentiment");
 const fetch = require("node-fetch");
 const User = require("../models/user");
 
@@ -28,8 +25,14 @@ async function saveRequest(req, res, next) {
     link: req.body.link,
   };
   User.findById(req.body.userId, function (error, currUser) {
-    currUser.requests.push(newRequest);
+    const newdoc = currUser.requests.create(newRequest);
+
+    currUser.requests.push(newdoc);
+
     currUser.save();
+
+    console.log("id of new review ", newdoc._id);
+    res.status(201).json({ data: newdoc._id });
     // console.log('awesome')
   });
 }
