@@ -1,0 +1,81 @@
+#title {
+  text-align: center;
+  font-family: arial, sans-serif;
+  color: #00acee;
+  font-weight: 600;
+}
+
+#newTitle {
+  text-align: center;
+  font-family: arial, sans-serif;
+  color: black;
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.requestDiv {
+  border: 1px solid black;
+}
+
+#requests {
+  text-align: center;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  border: 2px solid black;
+  width: 100%;
+}
+
+#requests td,
+#requests th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#requests tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#requests tr:hover {
+  background-color: #ddd;
+}
+
+#requests th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #00acee;
+  color: white;
+}
+
+#requestGreen th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #66cdaa;
+  color: white;
+}
+.textDiv {
+  width: 500px;
+}
+
+#requestGreen {
+  text-align: center;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  border: 2px solid black;
+  width: 100%;
+}
+
+#requestGreen td,
+#requestGreen th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#requestGreen tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#requestGreen tr:hover {
+  background-color: #ddd;
+}

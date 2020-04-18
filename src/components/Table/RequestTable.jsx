@@ -4,7 +4,11 @@ import "./RequestTable.css";
 
 class RequestsTable extends React.Component {
   renderTableData() {
-    return this.props.allRequestLinks.map((link, index) => {
+    let structureToMap = this.props.allRequestLinks;
+    if (this.props.allRequestLinks.length === 0) {
+      structureToMap = ["no requests  :)"];
+    }
+    return structureToMap.map((link, index) => {
       let numReviews = this.props.allRequestNums[index];
       let id = this.props.allRequestIds[index];
 
@@ -12,10 +16,9 @@ class RequestsTable extends React.Component {
         <tr key={index}>
           <td>{link}</td>
           <td>{numReviews}</td>
-          <td>{30}</td>
-          <td>{40}</td>
-          <td>{30}</td>
-          <td>{id}</td>
+          <td>{this.props.positive}</td>
+          <td>{this.props.negative}</td>
+          <td>{this.props.neutral}</td>
           <td>
             <button value={id} onClick={(e) => this.sendData(e.target.value)}>
               X
@@ -35,6 +38,9 @@ class RequestsTable extends React.Component {
   }
 
   sendData = (val) => {
+    if (!val) {
+      return;
+    }
     this.props.delFunction(val);
   };
 
@@ -45,7 +51,6 @@ class RequestsTable extends React.Component {
       "% Positive",
       "% Negative",
       "% Neutral",
-      "review Id",
       "DEL",
     ];
     return header.map((head) => {

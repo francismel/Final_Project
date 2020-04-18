@@ -6,6 +6,7 @@ const usersCtrl = require("../../controllers/users");
 // router.get("/", usersCtrl.index);
 router.post("/signup", usersCtrl.signup);
 router.post("/login", usersCtrl.login);
+router.post("/edit", usersCtrl.edit);
 
 /*---------- Protected Routes ----------*/
 

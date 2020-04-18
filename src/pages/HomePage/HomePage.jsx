@@ -5,12 +5,18 @@ import PieChart from "../../components/PieChart/PieChart";
 import userService from "../../utils/userService";
 import RequestsTable from "../../components/Table/RequestTable";
 import "./HomePage.css";
+import Comments from "../../components/Comments/Comments";
 
 class HomePage extends Component {
   state = {
     user: userService.getUser(),
+    comments: ["no comments yet"],
     updateVal: 0,
-    mainDonut: {},
+    title1: "Nothing Yet",
+    title2: "Nothing Yet",
+    positive: 30,
+    negative: 30,
+    neutral: 30,
     message: "",
     invalidForm: true,
     firstCompareDonut: {
@@ -100,10 +106,17 @@ class HomePage extends Component {
     e.preventDefault();
     console.log("makeFetchCall being called");
     try {
-      let result = await fetch("http://127.0.0.1:5000/analyze/facebook/12/");
+      let result = await fetch("http://127.0.0.1:5000/sayHi");
       if (result.ok) {
         const parsedRes = await result.json();
-        console.log(parsedRes);
+        console.log("parsed res", parsedRes);
+        this.setState({
+          positive: parsedRes.positive,
+          negative: parsedRes.negative,
+          neutral: parsedRes.neutral,
+          title1: "Chart 1",
+          title2: "Chart 2",
+        });
         return parsedRes;
       }
       throw new Error("didnt work");
@@ -142,12 +155,36 @@ class HomePage extends Component {
       allRequestIds: this.state.allRequestIds.concat(reviewId.data),
       allRequestNums: this.state.allRequestNums.concat(numReviews),
     });
+
+    console.log("makeFetchCall being called");
+    try {
+      let result = await fetch("http://127.0.0.1:5000/sayHi/1");
+      if (result.ok) {
+        const parsedRes = await result.json();
+        console.log(parsedRes);
+        this.setState({
+          positive: parsedRes.positive,
+          negative: parsedRes.negative,
+          neutral: parsedRes.neutral,
+          title1: "Chart 1",
+          title2: "Chart 2",
+          comments: parsedRes.comments,
+        });
+        return parsedRes;
+      }
+      throw new Error("didnt work");
+    } catch (err) {
+      alert("Error!");
+    }
   };
 
   render() {
     return (
       <div className="LoginPage">
-        <h1>Please Enter a Yelp.com Url for analysis!</h1>
+        <div className="yelp">
+          <h1>Enter a Yelp.com Url!</h1>
+        </div>
+        <br></br>
         <form
           ref={this.formRef}
           className="form-horizontal"
@@ -177,40 +214,49 @@ class HomePage extends Component {
               />
             </div>
           </div>
-          <button type="submit" disabled={this.state.invalidForm}>
+          <button
+            type="submit"
+            className="buttonBlue"
+            disabled={this.state.invalidForm}
+          >
             Submit
           </button>
         </form>
 
         <div className="editForm"></div>
+        <br></br>
 
         <div className="flexMe centerMe">
+          <br></br>
           <PieChart
-            title="Chart 1"
-            data={[20, 50, 50]}
-            shouldShow={this.state.firstCompareDonut.showFirstDonut}
+            title={"Python's Model"}
+            positive={this.state.positive}
+            negative={this.state.negative}
+            neutral={this.state.neutral}
+            shouldShow={true}
           />
 
           <PieChart
-            title="Chart 2"
-            data={[30, 10, 50]}
-            shouldShow={this.state.secondCompareDonut.showSecondDonut}
+            title={"Mel's Model"}
+            positive={this.state.positive}
+            negative={this.state.negative}
+            neutral={this.state.neutral}
+            shouldShow={true}
           />
         </div>
         <br></br>
-        <button onClick={this.makeFetchCall}>fetch call</button>
-        <button onClick={this.showPie} type="button">
-          Compare!
-        </button>
-        <button onClick={this.hidePie} type="button">
-          Close
-        </button>
-        <p>id to delete: {this.state.message}</p>
+        <Comments allComments={this.state.comments} />
+        <br></br>
+        <br></br>
+
         <RequestsTable
           user={this.state.user}
           allRequestLinks={this.state.allRequestLinks}
           allRequestIds={this.state.allRequestIds}
           allRequestNums={this.state.allRequestNums}
+          positive={this.state.positive}
+          negative={this.state.negative}
+          neutral={this.state.neutral}
           delFunction={this.delFunction}
         />
       </div>

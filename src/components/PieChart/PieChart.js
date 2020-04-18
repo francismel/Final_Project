@@ -14,7 +14,7 @@ class PieChart extends Component {
         },
       },
 
-      series: props.data,
+      series: [30, 30, 30],
     };
   }
 
@@ -23,7 +23,11 @@ class PieChart extends Component {
       <div className="donut">
         <Chart
           options={this.state.options}
-          series={this.state.series}
+          series={[
+            this.props.positive,
+            this.props.negative,
+            this.props.neutral,
+          ]}
           type="donut"
           width="380"
         />

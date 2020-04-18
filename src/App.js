@@ -8,12 +8,14 @@ import userService from "./utils/userService";
 import NavBar from "./components/NavBar/NavBar";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import HomePage from "./pages/HomePage/HomePage";
+import EditForm from "./components/EditName/EditName";
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       user: userService.getUser(),
+      name: userService.getUser().name,
     };
   }
 
@@ -40,6 +42,7 @@ class App extends React.Component {
                 <div>
                   <NavBar
                     user={this.state.user}
+                    name={this.state.name}
                     handleLogout={this.handleLogout}
                   />
                   <LoginPage handleSignupOrLogin={this.handleSignupOrLogin} />
@@ -84,6 +87,23 @@ class App extends React.Component {
                 </div>
               )
             }
+          />
+
+          <Route
+            exact
+            path="/edit"
+            render={(props) => (
+              <div>
+                <NavBar
+                  user={this.state.user}
+                  handleLogout={this.handleLogout}
+                />
+                <EditForm
+                  user={this.state.user}
+                  handleSignupOrLogin={this.handleSignupOrLogin}
+                />
+              </div>
+            )}
           />
         </Switch>
       </div>

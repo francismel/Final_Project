@@ -1,13 +1,19 @@
 #title {
   text-align: center;
   font-family: arial, sans-serif;
+  color: #00acee;
+  font-weight: 600;
+}
+
+.requestDiv {
+  border: 1px solid black;
 }
 
 #requests {
   text-align: center;
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  border: 3px solid #ddd;
+  border: 2px solid black;
   width: 100%;
 }
 

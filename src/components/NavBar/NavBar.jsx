@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import EditForm from "../../components/EditName/EditName";
 
 import "./NavBar.css";
 
@@ -30,18 +29,9 @@ const NavBar = (props) => {
         HOME
       </NavLink>
       &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      <NavLink
-        to="/home"
-        onClick={() => {
-          alert("visible");
-        }}
-        className="whiteText text-muted"
-      >
+      <NavLink to="/edit" className="whiteText text-muted">
         EDIT
       </NavLink>
-      <div className="editFormVisible">
-        <EditForm />
-      </div>
     </div>
   ) : (
     <div className="nav">
