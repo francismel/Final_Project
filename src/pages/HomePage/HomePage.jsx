@@ -4,6 +4,7 @@ import analysisService from "../../utils/analysisService";
 import PieChart from "../../components/PieChart/PieChart";
 import userService from "../../utils/userService";
 import RequestsTable from "../../components/Table/RequestTable";
+import "./HomePage.css";
 
 class HomePage extends Component {
   state = {
@@ -58,17 +59,30 @@ class HomePage extends Component {
     });
   };
 
-  async delRequest(idToDel) {
+  delRequest = async (idToDel) => {
+    let idIndex = this.state.allRequestIds.indexOf(idToDel);
+
+    let remainingLinks = this.state.allRequestLinks;
+    remainingLinks.splice(idIndex, 1);
+
+    let remainingNums = this.state.allRequestNums;
+    remainingNums.splice(idIndex, 1);
+
+    this.setState({
+      allRequestIds: this.state.allRequestIds.filter((p) => p !== idToDel),
+      allRequestLinks: remainingLinks,
+      allRequestNums: remainingNums,
+    });
     let userRequestInfo = {
       userId: this.state.user._id,
       reviewId: idToDel,
     };
     await analysisService.delRequest(userRequestInfo);
-  }
+  };
 
-  delFunction = (childData) => {
-    this.setState({ message: childData });
-    console.log("id to delete ", childData);
+  delFunction = async (childData) => {
+    // this.setState({ message: childData });
+    await this.delRequest(childData);
   };
 
   showPie = () => {
@@ -80,6 +94,22 @@ class HomePage extends Component {
         showSecondDonut: true,
       },
     });
+  };
+
+  makeFetchCall = async (e) => {
+    e.preventDefault();
+    console.log("makeFetchCall being called");
+    try {
+      let result = await fetch("http://127.0.0.1:5000/analyze/facebook/12/");
+      if (result.ok) {
+        const parsedRes = await result.json();
+        console.log(parsedRes);
+        return parsedRes;
+      }
+      throw new Error("didnt work");
+    } catch (err) {
+      alert("Error!");
+    }
   };
 
   hidePie = () => {
@@ -107,9 +137,6 @@ class HomePage extends Component {
     };
 
     let reviewId = await analysisService.saveRequest(request);
-
-    console.log("review id ", reviewId.data);
-
     this.setState({
       allRequestLinks: this.state.allRequestLinks.concat(url),
       allRequestIds: this.state.allRequestIds.concat(reviewId.data),
@@ -154,6 +181,9 @@ class HomePage extends Component {
             Submit
           </button>
         </form>
+
+        <div className="editForm"></div>
+
         <div className="flexMe centerMe">
           <PieChart
             title="Chart 1"
@@ -168,6 +198,7 @@ class HomePage extends Component {
           />
         </div>
         <br></br>
+        <button onClick={this.makeFetchCall}>fetch call</button>
         <button onClick={this.showPie} type="button">
           Compare!
         </button>

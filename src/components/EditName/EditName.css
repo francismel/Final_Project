@@ -1,0 +1,13 @@
+.submit {
+  background-color: #00acee;
+  color: white;
+  font-size: 0.8 em;
+  padding: 0px 10px 0px 10px;
+  font-weight: 300;
+  border-radius: 20px;
+}
+
+.flexMe {
+  display: flex;
+  flex-direction: left;
+}

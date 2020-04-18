@@ -1,0 +1,7 @@
+.editForm {
+  position: absolute;
+  top: 5%;
+  right: 20%;
+  border: 1px solid black;
+  border-radius: 10px;
+}

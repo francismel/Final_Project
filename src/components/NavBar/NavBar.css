@@ -21,3 +21,19 @@
   color: white;
   font-weight: 600;
 }
+
+.editFormVisible {
+  border: 1px solid grey;
+  padding: 5px 0px 0px 0px;
+  border-radius: 15px;
+  position: absolute;
+  top: 7%;
+  right: 17%;
+}
+
+.editFormNone {
+  display: none;
+  position: absolute;
+  top: 7%;
+  right: 17%;
+}

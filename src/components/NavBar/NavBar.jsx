@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import EditForm from "../../components/EditName/EditName";
 
 import "./NavBar.css";
 
@@ -7,11 +8,11 @@ const NavBar = (props) => {
   let nav = props.user ? (
     <div className="nav">
       <NavLink
-        to="/home"
+        to="/about"
         activeStyle={{ color: "white" }}
         className="whiteText text-muted"
       >
-        TBD
+        ABOUT
       </NavLink>
       &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
       <NavLink
@@ -23,11 +24,24 @@ const NavBar = (props) => {
         LOG OUT
       </NavLink>
       &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+      <span className="NavBar-welcome">WELCOME, {props.user.name}</span>
+      &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
       <NavLink to="/home" className="whiteText text-muted">
         HOME
       </NavLink>
       &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      <span className="NavBar-welcome">WELCOME, {props.user.name}</span>
+      <NavLink
+        to="/home"
+        onClick={() => {
+          alert("visible");
+        }}
+        className="whiteText text-muted"
+      >
+        EDIT
+      </NavLink>
+      <div className="editFormVisible">
+        <EditForm />
+      </div>
     </div>
   ) : (
     <div className="nav">
