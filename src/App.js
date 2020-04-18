@@ -15,7 +15,6 @@ class App extends React.Component {
     super();
     this.state = {
       user: userService.getUser(),
-      name: userService.getUser().name,
     };
   }
 
