@@ -6,13 +6,21 @@
   border-radius: 10px;
 }
 
+/* Make a sticky background */
+
 .yelp {
   color: black;
   font-size: 40px;
   border-radius: 5px;
   padding: 5px 15px 5px 15px;
   box-shadow: 1px 1px 1px 1px rgba(116, 116, 116, 0.486);
+  font-weight: 800;
 }
+
+body {
+  background-color: #e9f9ff;
+}
+
 .buttonBlue {
   background-color: #00acee;
   color: white;

@@ -19,7 +19,7 @@ class PieChart extends Component {
   }
 
   render() {
-    return this.props.shouldShow ? (
+    return (
       <div className="donut">
         <Chart
           options={this.state.options}
@@ -32,8 +32,6 @@ class PieChart extends Component {
           width="380"
         />
       </div>
-    ) : (
-      <p></p>
     );
   }
 }

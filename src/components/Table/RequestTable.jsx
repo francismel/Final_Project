@@ -14,13 +14,19 @@ class RequestsTable extends React.Component {
 
       return (
         <tr key={index}>
-          <td>{link}</td>
+          <td>
+            <div className="linkDiv">{link}</div>
+          </td>
           <td>{numReviews}</td>
           <td>{this.props.positive}</td>
           <td>{this.props.negative}</td>
           <td>{this.props.neutral}</td>
           <td>
-            <button value={id} onClick={(e) => this.sendData(e.target.value)}>
+            <button
+              className="button"
+              value={id}
+              onClick={(e) => this.sendData(e.target.value)}
+            >
               X
             </button>
           </td>

@@ -205,9 +205,9 @@ class HomePage extends Component {
           <div className="form-group">
             <div className="col-sm-12">
               <input
-                type="number"
+                type="numTweets"
                 className="form-control"
-                placeholder="number of tweets to process"
+                placeholder="# reviews to process: "
                 value={this.state.formData.numTweets}
                 name="numTweets"
                 onChange={this.handleChange}
@@ -228,6 +228,7 @@ class HomePage extends Component {
 
         <div className="flexMe centerMe">
           <br></br>
+
           <PieChart
             title={"Python's Model"}
             positive={this.state.positive}

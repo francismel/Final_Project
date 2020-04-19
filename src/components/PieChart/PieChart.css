@@ -2,4 +2,6 @@
   border: 1px solid grey;
   border-radius: 15px;
   margin-left: 20px;
+  box-shadow: 1px 1px 1px 1px rgba(116, 116, 116, 0.486);
+  background-color: white;
 }
