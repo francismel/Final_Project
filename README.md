@@ -1,68 +1,49 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#Tweet City!
+##Machine Learning Sentiment Analysis
 
-## Available Scripts
 
-In the project directory, you can run:
+##In Action
 
-### `npm start`
+![img1]
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![img2]
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `npm test`
+##About
+I originally intended for this app to run a sentiment analysis on tweets with the help of the twitter API. But after 2 weeks of being ghosted by twitter, I decided analyzing Yelp.com reviews was the next best choice. After exceeding the number of allowed API calls to Yelp and subsequently being banned from the site, I moved onto IMDB!
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+I used 2 machine learning models to analyze reviews. Textblob- a pre-trained Python machine learning library, as well as the "Mel Model" - a quick and dirty neural network my brother 
+and I cooked up for fun.
 
-### `npm run build`
+##Usage
+Just copy and paste a link to an IMDB user reviews page and press submit.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+example: https://www.imdb.com/title/tt0099785/reviews?ref_=tt_ql_3
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+##Technologies Used
+* MERN Stack
+* Python
+* Flask
+* CSS
+* HTML
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+##Next Steps
+* Enbale for Twitter
+* Improve UI
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+##Check it out
+[tweet-city.com]
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+[tweet-city.com]: https://tweetcity.herokuapp.com/
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+[img2]: https://i.imgur.com/lvpRYDM.png
+[img1]: https://i.imgur.com/HbVI4M9.png
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
-### Analyzing the Bundle Size
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
