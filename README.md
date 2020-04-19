@@ -33,7 +33,10 @@ example: https://www.imdb.com/title/tt0099785/reviews?ref_=tt_ql_3
 * Improve UI
 
 ##Check it out
-[tweet-city.com]
+link to app: [tweet-city.com]
+trello: https://trello.com/b/dBGOJnwE/twitter-app
+
+
 
 
 
