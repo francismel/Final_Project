@@ -3,21 +3,22 @@ import "./Comments.css";
 
 class Comments extends React.Component {
   renderTableData() {
-    let structureToMap = this.props.allComments;
-    if (this.props.allComments.length === 0) {
+    let structureToMap = Object.keys(this.props.allComments);
+    let answers = Object.values(this.props.allComments);
+    if (structureToMap === 0) {
       structureToMap = ["no comments were found  :("];
     }
     return structureToMap.map((comment, index) => {
-      if (comment.length > 100) {
-        comment = comment.slice(0, 100);
+      if (comment.length > 150) {
+        comment = comment.slice(0, 150) + "...";
       }
       return (
         <tr key={index}>
           <td>
             <div className="textDiv">{comment}</div>
           </td>
-          <td>positive</td>
-          <td>negative</td>
+          <td>{answers[index]}</td>
+          <td>{answers[index]}</td>
         </tr>
       );
     });

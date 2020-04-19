@@ -12,19 +12,28 @@ class HomePage extends Component {
     user: userService.getUser(),
     comments: ["no comments yet"],
     updateVal: 0,
-    title1: "Nothing Yet",
-    title2: "Nothing Yet",
     positive: 30,
     negative: 30,
     neutral: 30,
-    message: "",
+    reviews: {},
+    testReviews: {
+      '"Home Alone" is one of the most popular movies from the earl':
+        "positive",
+      "Home alone reviewHome alone is a warm, family comedy film ma":
+        "positive",
+      "My all time favorite film. Macaulay Culkin did superbly as a":
+        "positive",
+      "Home Alone is a nostalgic film for me, having watched it rel":
+        "negative",
+      "Home Alone (1990) Rating: 8/10It might be dumb and corny, bu":
+        "negative",
+      "In the Eighties, John Hughes churned out a handful of movies": "neutral",
+      "It's that time of year again, the time of year when it is ac": "neutral",
+      "I HAVE REVIEWED OVER 400 (C H R I S T M A S ) MOVIES AND SPE": "neutral",
+    },
+
+    postResponse: "",
     invalidForm: true,
-    firstCompareDonut: {
-      showFirstDonut: true,
-    },
-    secondCompareDonut: {
-      showSecondDonut: true,
-    },
     formData: {
       link: "",
       numTweets: 0,
@@ -91,40 +100,6 @@ class HomePage extends Component {
     await this.delRequest(childData);
   };
 
-  showPie = () => {
-    this.setState({
-      firstCompareDonut: {
-        showFirstDonut: true,
-      },
-      secondCompareDonut: {
-        showSecondDonut: true,
-      },
-    });
-  };
-
-  makeFetchCall = async (e) => {
-    e.preventDefault();
-    console.log("makeFetchCall being called");
-    try {
-      let result = await fetch("http://127.0.0.1:5000/sayHi");
-      if (result.ok) {
-        const parsedRes = await result.json();
-        console.log("parsed res", parsedRes);
-        this.setState({
-          positive: parsedRes.positive,
-          negative: parsedRes.negative,
-          neutral: parsedRes.neutral,
-          title1: "Chart 1",
-          title2: "Chart 2",
-        });
-        return parsedRes;
-      }
-      throw new Error("didnt work");
-    } catch (err) {
-      alert("Error!");
-    }
-  };
-
   hidePie = () => {
     this.setState({
       firstCompareDonut: {
@@ -156,33 +131,37 @@ class HomePage extends Component {
       allRequestNums: this.state.allRequestNums.concat(numReviews),
     });
 
-    console.log("makeFetchCall being called");
-    try {
-      let result = await fetch("http://127.0.0.1:5000/sayHi/1");
-      if (result.ok) {
-        const parsedRes = await result.json();
-        console.log(parsedRes);
+    return fetch("http://127.0.0.1:5000/poster", {
+      method: "POST",
+      headers: new Headers({ "Content-Type": "application/json" }),
+      body: JSON.stringify({
+        link: url,
+        numReviews: numReviews,
+      }),
+    })
+      .then((res) => {
+        if (res.ok) return res.json();
+        throw new Error("ignore for now!");
+      })
+      .then((data) => {
         this.setState({
-          positive: parsedRes.positive,
-          negative: parsedRes.negative,
-          neutral: parsedRes.neutral,
-          title1: "Chart 1",
-          title2: "Chart 2",
-          comments: parsedRes.comments,
+          postResponse: data.hi,
+          reviews: data.reviews,
+          positive: data.positive,
+          negative: data.negative,
+          neutral: data.neutral,
         });
-        return parsedRes;
-      }
-      throw new Error("didnt work");
-    } catch (err) {
-      alert("Error!");
-    }
+      });
   };
 
   render() {
     return (
       <div className="LoginPage">
         <div className="yelp">
-          <h1>Enter a Yelp.com Url!</h1>
+          <h1>Enter an IMDB.com user reviews Url!</h1>
+          <p className="small">
+            example: 'https://www.imdb.com/title/tt0099785/reviews?ref_=tt_ql_3'
+          </p>
         </div>
         <br></br>
         <form
@@ -246,7 +225,7 @@ class HomePage extends Component {
           />
         </div>
         <br></br>
-        <Comments allComments={this.state.comments} />
+        <Comments allComments={this.state.testReviews} />
         <br></br>
         <br></br>
 
@@ -260,6 +239,7 @@ class HomePage extends Component {
           neutral={this.state.neutral}
           delFunction={this.delFunction}
         />
+        <p>{this.state.postResponse}</p>
       </div>
     );
   }
