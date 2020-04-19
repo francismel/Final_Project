@@ -5,8 +5,9 @@ import "./RequestTable.css";
 class RequestsTable extends React.Component {
   renderTableData() {
     let structureToMap = this.props.allRequestLinks;
+
     if (this.props.allRequestLinks.length === 0) {
-      structureToMap = ["no requests  :)"];
+      structureToMap = ["no requests, just dummy data :)"];
     }
     return structureToMap.map((link, index) => {
       let numReviews = this.props.allRequestNums[index];
@@ -14,13 +15,21 @@ class RequestsTable extends React.Component {
 
       return (
         <tr key={index}>
+          <td>{this.props.title}</td>
+          <td>{this.props.year}</td>
+
           <td>
-            <div className="linkDiv">{link}</div>
+            <img
+              height="43"
+              width="30"
+              alt="nothing found"
+              src={this.props.src}
+            ></img>
           </td>
-          <td>{numReviews}</td>
           <td>{this.props.positive}</td>
           <td>{this.props.negative}</td>
           <td>{this.props.neutral}</td>
+
           <td>
             <button
               className="button"
@@ -52,8 +61,9 @@ class RequestsTable extends React.Component {
 
   renderTableHeader() {
     let header = [
-      "url",
-      "# reviews",
+      "movie",
+      "year",
+      "poster",
       "% Positive",
       "% Negative",
       "% Neutral",

@@ -6,15 +6,20 @@ import userService from "../../utils/userService";
 import RequestsTable from "../../components/Table/RequestTable";
 import "./HomePage.css";
 import Comments from "../../components/Comments/Comments";
+import Movie from "../../components/Movie/Movie";
 
 class HomePage extends Component {
   state = {
     user: userService.getUser(),
     comments: ["no comments yet"],
     updateVal: 0,
-    positive: 30,
-    negative: 30,
-    neutral: 30,
+    positive: 33,
+    negative: 33,
+    neutral: 33,
+    url:
+      "https://m.media-amazon.com/images/M/MV5BMzFkM2YwOTQtYzk2Mi00N2VlLWE3NTItN2YwNDg1YmY0ZDNmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UX67_CR0,0,67,98_AL_.jpg",
+    title: "Home Alone",
+    year: "(1990)",
     reviews: {},
     testReviews: {
       '"Home Alone" is one of the most popular movies from the earl':
@@ -150,6 +155,9 @@ class HomePage extends Component {
           positive: data.positive,
           negative: data.negative,
           neutral: data.neutral,
+          title: data.title,
+          year: data.year,
+          url: data.photo,
         });
       });
   };
@@ -204,6 +212,7 @@ class HomePage extends Component {
 
         <div className="editForm"></div>
         <br></br>
+        <br></br>
 
         <div className="flexMe centerMe">
           <br></br>
@@ -228,12 +237,20 @@ class HomePage extends Component {
         <Comments allComments={this.state.testReviews} />
         <br></br>
         <br></br>
+        <Movie
+          src={this.state.url}
+          title={this.state.title}
+          year={this.state.year}
+        />
 
         <RequestsTable
           user={this.state.user}
           allRequestLinks={this.state.allRequestLinks}
           allRequestIds={this.state.allRequestIds}
           allRequestNums={this.state.allRequestNums}
+          title={this.state.title}
+          year={this.state.year}
+          src={this.state.url}
           positive={this.state.positive}
           negative={this.state.negative}
           neutral={this.state.neutral}
