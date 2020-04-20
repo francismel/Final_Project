@@ -13,31 +13,25 @@ class HomePage extends Component {
     user: userService.getUser(),
     comments: ["no comments yet"],
     updateVal: 0,
-    positive: 33,
-    negative: 33,
-    neutral: 33,
-    url:
-      "https://m.media-amazon.com/images/M/MV5BMzFkM2YwOTQtYzk2Mi00N2VlLWE3NTItN2YwNDg1YmY0ZDNmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UX67_CR0,0,67,98_AL_.jpg",
-    title: "Home Alone",
-    year: "(1990)",
-    reviews: {},
-    testReviews: {
-      '"Home Alone" is one of the most popular movies from the earl':
-        "positive",
-      "Home alone reviewHome alone is a warm, family comedy film ma":
-        "positive",
-      "My all time favorite film. Macaulay Culkin did superbly as a":
-        "positive",
-      "Home Alone is a nostalgic film for me, having watched it rel":
-        "negative",
-      "Home Alone (1990) Rating: 8/10It might be dumb and corny, bu":
-        "negative",
-      "In the Eighties, John Hughes churned out a handful of movies": "neutral",
-      "It's that time of year again, the time of year when it is ac": "neutral",
-      "I HAVE REVIEWED OVER 400 (C H R I S T M A S ) MOVIES AND SPE": "neutral",
+    positive: 0.33,
+    negative: 0.33,
+    neutral: 0.33,
+    melPos: 0.33,
+    melNeg: 0.33,
+    melNeu: 0.33,
+    positives: [],
+    negatives: [],
+    neutrals: [],
+    urls: [],
+    titles: [],
+    years: [],
+
+    reviews: {
+      "No Reviews Yet": ["", ""],
     },
 
     postResponse: "",
+    navbarName: "",
     invalidForm: true,
     formData: {
       link: "",
@@ -61,6 +55,7 @@ class HomePage extends Component {
           allRequestLinks: this.state.allRequestLinks.concat(link),
           allRequestIds: this.state.allRequestIds.concat(id),
           allRequestNums: this.state.allRequestNums.concat(numReviews),
+          navbarName: this.state.user.name,
         });
       }
     }
@@ -82,16 +77,32 @@ class HomePage extends Component {
   delRequest = async (idToDel) => {
     let idIndex = this.state.allRequestIds.indexOf(idToDel);
 
-    let remainingLinks = this.state.allRequestLinks;
-    remainingLinks.splice(idIndex, 1);
+    let remainingUrls = this.state.urls;
+    remainingUrls.splice(idIndex, 1);
 
-    let remainingNums = this.state.allRequestNums;
-    remainingNums.splice(idIndex, 1);
+    let remainingPositives = this.state.positives;
+    remainingPositives.splice(idIndex, 1);
+
+    let remainingNegatives = this.state.negatives;
+    remainingNegatives.splice(idIndex, 1);
+
+    let remainingNeutrals = this.state.neutrals;
+    remainingNeutrals.splice(idIndex, 1);
+
+    let remainingTitles = this.state.titles;
+    remainingTitles.splice(idIndex, 1);
+
+    let remainingYears = this.state.years;
+    remainingYears.splice(idIndex, 1);
 
     this.setState({
       allRequestIds: this.state.allRequestIds.filter((p) => p !== idToDel),
-      allRequestLinks: remainingLinks,
-      allRequestNums: remainingNums,
+      urls: remainingUrls,
+      titles: remainingTitles,
+      years: remainingYears,
+      positives: remainingPositives,
+      negatives: remainingNegatives,
+      neutrals: remainingNeutrals,
     });
     let userRequestInfo = {
       userId: this.state.user._id,
@@ -155,9 +166,15 @@ class HomePage extends Component {
           positive: data.positive,
           negative: data.negative,
           neutral: data.neutral,
-          title: data.title,
-          year: data.year,
-          url: data.photo,
+          titles: this.state.titles.concat(data.title).reverse(),
+          years: this.state.years.concat(data.year).reverse(),
+          urls: this.state.urls.concat(data.photo),
+          positives: this.state.positives.concat(data.positive),
+          negatives: this.state.negatives.concat(data.negative),
+          neutrals: this.state.neutrals.concat(data.neutral),
+          melPos: data.melPos,
+          melNeg: data.melNeg,
+          melNeu: data.melNeu,
         });
       });
   };
@@ -227,14 +244,14 @@ class HomePage extends Component {
 
           <PieChart
             title={"Mel's Model"}
-            positive={this.state.positive}
-            negative={this.state.negative}
-            neutral={this.state.neutral}
+            positive={this.state.melPos}
+            negative={this.state.melNeg}
+            neutral={this.state.melNeu}
             shouldShow={true}
           />
         </div>
         <br></br>
-        <Comments allComments={this.state.testReviews} />
+        <Comments allComments={this.state.reviews} />
         <br></br>
         <br></br>
         <Movie
@@ -248,15 +265,14 @@ class HomePage extends Component {
           allRequestLinks={this.state.allRequestLinks}
           allRequestIds={this.state.allRequestIds}
           allRequestNums={this.state.allRequestNums}
-          title={this.state.title}
-          year={this.state.year}
-          src={this.state.url}
-          positive={this.state.positive}
-          negative={this.state.negative}
-          neutral={this.state.neutral}
+          titles={this.state.titles}
+          years={this.state.years}
+          srcs={this.state.urls}
+          positives={this.state.positives}
+          negatives={this.state.negatives}
+          neutrals={this.state.neutrals}
           delFunction={this.delFunction}
         />
-        <p>{this.state.postResponse}</p>
       </div>
     );
   }

@@ -15,12 +15,11 @@ class EditForm extends Component {
     event.preventDefault();
     let formData = {
       name: this.state.name,
-      email: this.state.email,
       userId: this.props.user._id,
     };
     try {
-      await userService.editUser(formData);
-      this.props.handleSignupOrLogin();
+      let result = await userService.editUser(formData);
+      this.props.changeName(result.newName);
     } catch (err) {
       console.log(err);
     }
@@ -40,19 +39,6 @@ class EditForm extends Component {
                 placeholder="New Name: "
                 value={this.state.name}
                 name="name"
-                onChange={this.handleChange}
-              />
-            </div>
-          </div>
-
-          <div className="form-group">
-            <div className="col-sm-12">
-              <input
-                type="email"
-                className="form-control"
-                placeholder="New Email: "
-                value={this.state.email}
-                name="email"
                 onChange={this.handleChange}
               />
             </div>

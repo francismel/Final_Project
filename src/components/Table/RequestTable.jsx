@@ -4,44 +4,58 @@ import "./RequestTable.css";
 
 class RequestsTable extends React.Component {
   renderTableData() {
-    let structureToMap = this.props.allRequestLinks;
+    let structureToMap = this.props.titles;
 
-    if (this.props.allRequestLinks.length === 0) {
+    if (this.props.titles.length === 0) {
       structureToMap = ["no requests, just dummy data :)"];
     }
-    return structureToMap.map((link, index) => {
-      let numReviews = this.props.allRequestNums[index];
-      let id = this.props.allRequestIds[index];
+    return this.props.titles.length === 0 ? (
+      <tr key={"zero"}>
+        <td>None Yet!</td>
+        <td></td>
 
-      return (
-        <tr key={index}>
-          <td>{this.props.title}</td>
-          <td>{this.props.year}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
 
-          <td>
-            <img
-              height="43"
-              width="30"
-              alt="nothing found"
-              src={this.props.src}
-            ></img>
-          </td>
-          <td>{this.props.positive}</td>
-          <td>{this.props.negative}</td>
-          <td>{this.props.neutral}</td>
+        <td></td>
+      </tr>
+    ) : (
+      structureToMap.map((link, index) => {
+        let numReviews = this.props.allRequestNums[index];
+        let id = this.props.allRequestIds[index];
 
-          <td>
-            <button
-              className="button"
-              value={id}
-              onClick={(e) => this.sendData(e.target.value)}
-            >
-              X
-            </button>
-          </td>
-        </tr>
-      );
-    });
+        return (
+          <tr key={index}>
+            <td>{this.props.titles[index]}</td>
+            <td>{this.props.years[index]}</td>
+
+            <td>
+              <img
+                height="43"
+                width="30"
+                alt="no poster :("
+                src={this.props.srcs[index]}
+              ></img>
+            </td>
+            <td>{Math.floor(this.props.positives[index] * 100)}</td>
+            <td>{Math.floor(this.props.negatives[index] * 100)}</td>
+            <td>{Math.floor(this.props.neutrals[index] * 100)}</td>
+
+            <td>
+              <button
+                className="button"
+                value={id}
+                onClick={(e) => this.sendData(e.target.value)}
+              >
+                X
+              </button>
+            </td>
+          </tr>
+        );
+      })
+    );
   }
 
   async delRequest(idToDel) {

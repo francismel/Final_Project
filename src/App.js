@@ -15,8 +15,15 @@ class App extends React.Component {
     super();
     this.state = {
       user: userService.getUser(),
+      newName: "",
     };
   }
+
+  changeName = async (newName) => {
+    this.setState({
+      newName: newName,
+    });
+  };
 
   handleLogout = () => {
     userService.logout();
@@ -42,6 +49,7 @@ class App extends React.Component {
                   <NavBar
                     user={this.state.user}
                     name={this.state.name}
+                    newName={this.state.newName}
                     handleLogout={this.handleLogout}
                   />
                   <LoginPage handleSignupOrLogin={this.handleSignupOrLogin} />
@@ -58,6 +66,7 @@ class App extends React.Component {
                 <div>
                   <NavBar
                     user={this.state.user}
+                    newName={this.state.newName}
                     handleLogout={this.handleLogout}
                   />
                   <HomePage />
@@ -80,6 +89,7 @@ class App extends React.Component {
                 <div>
                   <NavBar
                     user={this.state.user}
+                    newName={this.state.newName}
                     handleLogout={this.handleLogout}
                   />
                   <SignUpForm handleSignupOrLogin={this.handleSignupOrLogin} />
@@ -95,11 +105,13 @@ class App extends React.Component {
               <div>
                 <NavBar
                   user={this.state.user}
+                  newName={this.state.newName}
                   handleLogout={this.handleLogout}
                 />
                 <EditForm
                   user={this.state.user}
                   handleSignupOrLogin={this.handleSignupOrLogin}
+                  changeName={this.changeName}
                 />
               </div>
             )}

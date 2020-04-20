@@ -15,7 +15,7 @@ class Movie extends React.Component {
         ></img>
       </div>
     ) : (
-      <p>nothing</p>
+      <p></p>
     );
   }
 }

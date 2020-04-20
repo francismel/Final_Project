@@ -4,8 +4,7 @@ import "./Comments.css";
 class Comments extends React.Component {
   renderTableData() {
     let structureToMap = Object.keys(this.props.allComments);
-    let answers = Object.values(this.props.allComments);
-    if (structureToMap === 0) {
+    if (structureToMap.length === 0) {
       structureToMap = ["no comments were found  :("];
     }
     return structureToMap.map((comment, index) => {
@@ -17,8 +16,8 @@ class Comments extends React.Component {
           <td>
             <div className="textDiv">{comment}</div>
           </td>
-          <td>{answers[index]}</td>
-          <td>{answers[index]}</td>
+          <td>{this.props.allComments[comment][0]}</td>
+          <td>{this.props.allComments[comment][1]}</td>
         </tr>
       );
     });

@@ -48,7 +48,6 @@ function createJWT(user) {
 async function edit(req, res, next) {
   let userId = req.body.userId;
   let name = req.body.name;
-  let email = req.body.email;
 
   await User.findById(userId, async function (error, currUser) {
     console.log("curr user ", currUser.name);
@@ -57,7 +56,7 @@ async function edit(req, res, next) {
     currUser.name = name;
     console.log("name is now ", currUser.name);
 
-    currUser.email = email;
     await currUser.save();
+    res.status(201).json({ newName: name });
   });
 }

@@ -4,6 +4,16 @@ import { NavLink } from "react-router-dom";
 import "./NavBar.css";
 
 const NavBar = (props) => {
+  let name2Display = "";
+
+  if (props.user) {
+    if (props.newName.length > 0) {
+      name2Display = props.newName;
+    } else {
+      name2Display = props.user.name;
+    }
+  }
+
   let nav = props.user ? (
     <div className="nav">
       <NavLink
@@ -23,7 +33,7 @@ const NavBar = (props) => {
         LOG OUT
       </NavLink>
       &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      <span className="NavBar-welcome">WELCOME, {props.user.name}</span>
+      <span className="NavBar-welcome">WELCOME, {name2Display}</span>
       &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
       <NavLink to="/home" className="whiteText text-muted">
         HOME
