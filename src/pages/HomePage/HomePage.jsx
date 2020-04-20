@@ -147,7 +147,7 @@ class HomePage extends Component {
       allRequestNums: this.state.allRequestNums.concat(numReviews),
     });
 
-    return fetch("http://127.0.0.1:5000/poster", {
+    return fetch("https://flaskappfrancis.herokuapp.com/poster", {
       method: "POST",
       headers: new Headers({ "Content-Type": "application/json" }),
       body: JSON.stringify({
@@ -158,6 +158,10 @@ class HomePage extends Component {
       .then((res) => {
         if (res.ok) return res.json();
         throw new Error("ignore for now!");
+
+        // alert(
+        //   "not a valid link. You must enter a link to USER REVIEWS page of IMDB movie. See example below. "
+        // );
       })
       .then((data) => {
         this.setState({
@@ -166,8 +170,8 @@ class HomePage extends Component {
           positive: data.positive,
           negative: data.negative,
           neutral: data.neutral,
-          titles: this.state.titles.concat(data.title).reverse(),
-          years: this.state.years.concat(data.year).reverse(),
+          titles: this.state.titles.concat(data.title),
+          years: this.state.years.concat(data.year),
           urls: this.state.urls.concat(data.photo),
           positives: this.state.positives.concat(data.positive),
           negatives: this.state.negatives.concat(data.negative),
@@ -183,10 +187,39 @@ class HomePage extends Component {
     return (
       <div className="LoginPage">
         <div className="yelp">
-          <h1>Enter an IMDB.com user reviews Url!</h1>
-          <p className="small">
-            example: 'https://www.imdb.com/title/tt0099785/reviews?ref_=tt_ql_3'
-          </p>
+          <h1>
+            Enter an IMDB.com <span className="highlight">User Reviews </span>
+            Url!
+          </h1>
+          <div className="example">
+            <ul className="blue-text medium highlight">
+              30 second Instructions:
+            </ul>
+            <li className="small">Open any IMDB movie page.</li>
+            <li className="small">Click the 'users review' tab.</li>
+
+            <img
+              width="300"
+              height="133"
+              alt="parasite imdb"
+              src="https://i.imgur.com/uzD0QTn.jpg"
+            ></img>
+
+            <li className="small">You are now at a reviews page</li>
+
+            <img
+              width="300"
+              height="125"
+              alt="parasite reviews page"
+              src="https://i.imgur.com/SGVTpVZ.png"
+            ></img>
+
+            <li className="small">Paste the url below!</li>
+            <li className="small">
+              example:
+              'https://www.imdb.com/title/tt0099785/reviews?ref_=tt_ql_3'
+            </li>
+          </div>
         </div>
         <br></br>
         <form
@@ -203,6 +236,7 @@ class HomePage extends Component {
                 value={this.state.formData.link}
                 name="link"
                 onChange={this.handleChange}
+                id="link"
               />
             </div>
           </div>
@@ -244,9 +278,9 @@ class HomePage extends Component {
 
           <PieChart
             title={"Mel's Model"}
-            positive={this.state.melPos}
-            negative={this.state.melNeg}
-            neutral={this.state.melNeu}
+            positive={this.state.positive}
+            negative={this.state.negative}
+            neutral={this.state.neutral}
             shouldShow={true}
           />
         </div>

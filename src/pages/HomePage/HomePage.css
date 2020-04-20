@@ -6,25 +6,42 @@
   border-radius: 10px;
 }
 
-/* Make a sticky background */
-
 .yelp {
   color: black;
   font-size: 40px;
   border-radius: 5px;
   padding: 5px 15px 5px 15px;
-  box-shadow: 1px 1px 1px 1px rgba(116, 116, 116, 0.486);
+  box-shadow: 2px 2px 2px 2px rgba(116, 116, 116, 0.486);
   font-weight: 800;
   background-color: white;
+  height: 150px;
+  overflow: auto;
+  resize: vertical;
+  border: 1px solid black;
+}
+
+.example {
+  margin-top: 25px;
+}
+
+.blue-text {
+  color: black;
+}
+.medium {
+  font-size: 20px;
 }
 
 body {
   background-color: #e9f9ff;
 }
 
+.highlight {
+  text-decoration: underline;
+}
+
 .small {
-  font-size: 12px;
-  color: grey;
+  font-size: 16px;
+  color: black;
 }
 
 .buttonBlue {

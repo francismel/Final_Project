@@ -17,7 +17,7 @@ class Comments extends React.Component {
             <div className="textDiv">{comment}</div>
           </td>
           <td>{this.props.allComments[comment][0]}</td>
-          <td>{this.props.allComments[comment][1]}</td>
+          <td>{this.props.allComments[comment][0]}</td>
         </tr>
       );
     });
