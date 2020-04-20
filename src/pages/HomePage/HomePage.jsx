@@ -191,35 +191,42 @@ class HomePage extends Component {
             Enter an IMDB.com <span className="highlight">User Reviews </span>
             Url!
           </h1>
-          <div className="example">
-            <ul className="blue-text medium highlight">
-              30 second Instructions:
-            </ul>
-            <li className="small">Open any IMDB movie page.</li>
-            <li className="small">Click the 'users review' tab.</li>
+          <ul class="list-group">
+            <li class="list-group-item">Instructions:</li>
 
-            <img
-              width="300"
-              height="133"
-              alt="parasite imdb"
-              src="https://i.imgur.com/uzD0QTn.jpg"
-            ></img>
-
-            <li className="small">You are now at a reviews page</li>
-
-            <img
-              width="300"
-              height="125"
-              alt="parasite reviews page"
-              src="https://i.imgur.com/SGVTpVZ.png"
-            ></img>
-
-            <li className="small">Paste the url below!</li>
-            <li className="small">
+            <li class="list-group-item list-group-item-primary">
+              1.Open any IMDB movie page.
+            </li>
+            <li class="list-group-item list-group-item-secondary">
+              2.Click the 'users review' tab.
+            </li>
+            <li class="list-group-item list-group-item-success">
+              <img
+                width="300"
+                height="133"
+                alt="parasite imdb"
+                src="https://i.imgur.com/uzD0QTn.jpg"
+              ></img>
+            </li>
+            <li class="list-group-item list-group-item-danger">
+              3.You are now at a reviews page
+            </li>
+            <li class="list-group-item list-group-item-warning">
+              <img
+                width="300"
+                height="125"
+                alt="parasite reviews page"
+                src="https://i.imgur.com/QmSqxd4.png"
+              ></img>
+            </li>
+            <li class="list-group-item list-group-item-info">
+              4.Paste your url below!
+            </li>
+            <li class="list-group-item list-group-item-light">
               example:
               'https://www.imdb.com/title/tt0099785/reviews?ref_=tt_ql_3'
             </li>
-          </div>
+          </ul>
         </div>
         <br></br>
         <form
